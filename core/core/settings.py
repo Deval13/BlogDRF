@@ -133,3 +133,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
