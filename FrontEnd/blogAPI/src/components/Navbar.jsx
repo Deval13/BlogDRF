@@ -1,161 +1,159 @@
-import { useState } from "react";
-export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+import  { useState } from 'react';
+import { makeStyles} from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
+import SearchBar from 'material-ui-search-bar';
+import { useNavigate } from 'react-router-dom';
+// import  {ReactComponent as AddpostSvg} from '../media/addpost.svg'
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+import '../index.css'
 
-  return (
-    <nav className="bg-white border-gray-200 bg-grey-200 dark:bg-gray-900 w-full">
-      <div className="flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="https://flowbite.com/"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
+const useStyles = makeStyles((theme) => ({
+	appBar: {
+		backgroundColor: '#9CA3AF',
+		borderBottom: `1px solid ${theme.palette.divider}`
+
+	},
+	link: {
+		margin: theme.spacing(1, 1.5),
+	},
+	toolbarTitle: {
+		flexGrow: 1,
+	},
+}));
+
+export function Header() {
+	// const classes = useStyles();
+	const navigate = useNavigate();
+	const [data, setData] = useState({ search: '' });
+
+	const goSearch = () => {
+		console.log("Navbar component" + data.search);
+		console.log(" Navbar component2" + '?search=' + data.search)
+		navigate({
+			pathname: '/search/',
+			search: '?search=' + data.search
+		});
+	};
+
+	return (
+	<header className="bg-gray-300 border-b-2 shadow-md" >
+			<div className="container mx-auto p-4 flex flex-row justify-between gap-8 items-center">
+		<div> <NavLink to="/" className="text-2xl font-bold text-gray-800">
+          BlogByte
+				</NavLink></div>
+        {/* Logo or Title */}
+				<div className='flex flex-row gap-4 justify-between'>
+					<a onClick={() => {
+					navigate('/')
+					}} >
+						<svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 122.88 112.07"
+            className="w-9 h-9" // Tailwind classes to set size
         >
-          <img
-            src="/api/placeholder/32/32"
-            className="h-8"
-            alt="Flowbite Logo"
-          />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
-          </span>
-        </a>
-        <div className="flex md:order-1">
-          <button
-            type="button"
-            onClick={toggleMenu}
-            className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1 w-full"
-          >
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-            <span className="sr-only">Search</span>
-          </button>
-          <div className="relative hidden md:block">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
+            <style>
+                {`
+                    .st0 {
+                        fill-rule:evenodd;
+                        clip-rule:evenodd;
+                    }
+                `}
+            </style>
+            <g>
                 <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    className="st0"
+                    d="M61.44,0L0,60.18l14.99,7.87L61.04,19.7l46.85,48.36l14.99-7.87L61.44,0L61.44,0z M18.26,69.63L18.26,69.63 L61.5,26.38l43.11,43.25h0v0v42.43H73.12V82.09H49.49v29.97H18.26V69.63L18.26,69.63L18.26,69.63z"
                 />
-              </svg>
-              <span className="sr-only">Search icon</span>
-            </div>
-            <input
-              type="text"
-              id="search-navbar"
-              className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search..."
-            />
-          </div>
-          <button
-            onClick={toggleMenu}
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            </g>
+        </svg>
+					</a>
+				<a href="" className='hover:bg-grey-800' onClick={() => {
+					navigate('/admin/create')
+				}} >
+					<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 100 125"
+    className="w-12 h-12 ml-2"
+    enableBackground="new 0 0 100 100"
+    xmlSpace="preserve"
+  >
+    <path d="M92.878,12.877c0,1.021-0.398,1.981-1.12,2.704L55.509,51.832c-0.984,0.85-5.537,2.229-10.853,3.374  
+      c1.599-4.993,3.295-9.14,4.176-10.027L85.094,8.916c0.723-0.72,1.683-1.12,2.704-1.12c1.021,0,1.981,0.4,2.702,1.12l1.259,1.259  
+      C92.481,10.898,92.878,11.857,92.878,12.877z M80.369,36.289v51.495c0,2.436-1.983,4.419-4.419,4.419H11.541  
+      c-2.436,0-4.419-1.983-4.419-4.419v-62.48c0-2.436,1.983-4.419,4.419-4.419h52.266L44.173,40.52  
+      c-1.063,1.061-2.603,3.229-5.105,10.62c-1.305,3.855-2.247,7.308-2.287,7.453c-0.297,1.083-0.018,2.24,0.734,3.073  
+      c0.63,0.698,1.522,1.087,2.445,1.087c0.18,0,0.36-0.015,0.54-0.046c0.158-0.026,3.93-0.655,8.11-1.643  
+      c8.107-1.918,10.429-3.444,11.547-4.562L80.369,36.289z M74.775,72.914c0-1.819-1.474-3.295-3.295-3.295  
+      c-1.819,0-3.295,1.476-3.295,3.295v6.864c0,0.051-0.04,0.09-0.09,0.09H21.199c-1.821,0-3.295,1.476-3.295,3.295  
+      c0,1.821,1.474,3.295,3.295,3.295h46.896c3.684,0,6.68-2.996,6.68-6.68V72.914z"/>
+  </svg></a>
+
+         
+				<button className="bg-gray-700 text-white px-2 py-2 rounded-2xl hover:bg-gray-800" onClick={() => { navigate('/admin') }} >
+				  MyPosts
+				</button>
+        
+
+		</div>
+				{/* Search Bar */}
+				{/* <SearchBar
+	// 					value={data.search}
+	// 					onChange={(newValue) => setData({ search: newValue })}
+	// 					onRequestSearch={() => goSearch()}
+	// 				/> */}
+        
+		            <SearchBar
+						value={data.search}
+						onChange={(newValue) => setData({ search: newValue })}
+						onRequestSearch={() => goSearch()}
+					/>		
+
+        {/* Navigation Links */}
+        <nav className="flex space-x-4 items-center">
+          <NavLink
+						to="/register"
+						 className="bg-gray-700 text-white px-2 py-2 rounded-2xl hover:bg-gray-800"
           >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
-        </div>
-        <div
-          className={`items-center justify-between ${
-            isMenuOpen ? "block" : "hidden"
-          } w-full md:flex md:w-auto md:order-1`}
-          id="navbar-search"
-        >
-          <div className="relative mt-3 md:hidden">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              id="search-navbar-mobile"
-              className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search..."
-            />
-          </div>
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                aria-current="page"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Services
-              </a>
-            </li>
-          </ul>
-        </div>
+            Register
+          </NavLink>
+
+          <NavLink
+						to="/login"
+						 className="bg-gray-700 text-white px-4 py-2 rounded-2xl hover:bg-gray-800"
+          >
+            Login
+          </NavLink>
+
+          <a onClick={() => { navigate('/logout') }} >
+			
+			   <svg
+    fill="#000000"
+    version="1.1"
+    id="Capa_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 384.971 384.971"
+    xmlSpace="preserve"
+    className="w-6 h-6 ml-2" // Adjust size as needed
+  >
+    <g id="Sign_Out">
+      <path d="M180.455,360.91H24.061V24.061h156.394c6.641,0,12.03-5.39,12.03-12.03s-5.39-12.03-12.03-12.03H12.03
+        C5.39,0.001,0,5.39,0,12.031V372.94c0,6.641,5.39,12.03,12.03,12.03h168.424c6.641,0,12.03-5.39,12.03-12.03
+        C192.485,366.299,187.095,360.91,180.455,360.91z"/>
+      <path d="M381.481,184.088l-83.009-84.2c-4.704-4.752-12.319-4.74-17.011,0c-4.704,4.74-4.704,12.439,0,17.179l62.558,63.46H96.279
+        c-6.641,0-12.03,5.438-12.03,12.151c0,6.713,5.39,12.151,12.03,12.151h247.74l-62.558,63.46c-4.704,4.752-4.704,12.439,0,17.179
+        c4.704,4.752,12.319,4.752,17.011,0l82.997-84.2C386.113,196.588,386.161,188.756,381.481,184.088z"/>
+    </g>
+  </svg>	  
+		  </a>
+
+         
+        </nav>
       </div>
-    </nav>
-  );
-};
-
-;
+    </header>
+  );	
+}

@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
-
-function ExampleComponent() {
+// import axios from "axios";
+import { PostCard } from "./components/PostCard";
+import { axiosInstance } from "./axois";
+// import axios from "axios";
+function ListPosts() {
   const [data, setData] = useState(null); // Use null for initial state to handle loading state
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api");
+      console.log("acc token " + localStorage.getItem('access_token'));
+      console.log('refesh ' + localStorage.getItem("refresh_token"))
+      const { data } = await axiosInstance.get();
+      
+      console.log("data = " + data);
       setData(data); // Assuming data is an array and you want the first element
     } catch (err) {
-      console.error("Error fetching data:", err);
+      console.log("Error fetching data:", err);
       setError("Failed to fetch data");
     }
   };
@@ -27,11 +33,11 @@ function ExampleComponent() {
   return (
     <div>
       {data ? (
-        <div>
-          <p>HI from second component</p>
+        <div className="grid grid-cols-2 gap-4 p-4  md:grid-cols-4">
+          
           {console.log(data)}
           {data.map(datas => {
-            return <div>Name is {datas.author} data is { datas.id }</div>
+            return <PostCard props={datas}></PostCard>
           })}
           {/* Render other data fields as necessary */}
         </div>
@@ -45,8 +51,7 @@ function ExampleComponent() {
 function App() {
   return (
     <div>
-      <h1>Hi there</h1>
-      <ExampleComponent />
+       <ListPosts></ListPosts>
     </div>
   );
 }
