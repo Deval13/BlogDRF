@@ -32,6 +32,7 @@ function ListPosts() {
 
   return (
     <div>
+      
       {data ? (
         <div className="grid grid-cols-2 gap-4 p-4  md:grid-cols-4">
           

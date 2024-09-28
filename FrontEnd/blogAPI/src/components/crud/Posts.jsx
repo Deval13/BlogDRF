@@ -86,7 +86,7 @@ export const Posts = (props) => {
 												</Link>
 												<Link
 													color="textPrimary"
-													href={'/admin/delete/' + post.id}
+													href={'/admin/delete/' + post.id }
 													className={classes.link}
 												>
 													<DeleteForeverIcon></DeleteForeverIcon>

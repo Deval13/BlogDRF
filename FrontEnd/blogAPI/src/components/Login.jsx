@@ -68,6 +68,9 @@ export function SignIn() {
           console.log("new refersh_token" + localStorage.getItem("refresh_token"));
           axiosInstance.defaults.headers["Authorization"] =
             "JWT " + localStorage.getItem("access_token");
+          alert(
+                'user created successfully !!'
+            );
           history("/");
           //console.log(res);
           //console.log(res.data);
@@ -75,8 +78,7 @@ export function SignIn() {
     }
     catch (err) {
       console.log(err);
-      alert("Please Check Your User Credentials")
-      
+      alert("Please Check Your User Credentials") 
     }
   };
 

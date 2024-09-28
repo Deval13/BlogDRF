@@ -56,7 +56,8 @@ export function SignUp() {
     e.preventDefault();
     console.log(formData);
 
-    axiosInstance
+    try {
+      axiosInstance
       .post(`user/create/`, {
         email: formData.email,
         user_name: formData.username,
@@ -67,6 +68,10 @@ export function SignUp() {
         console.log(res);
         console.log(res.data);
       });
+    }
+    catch (err) {
+      alert('Check Your registering credentials')
+    }
   };
 
   const classes = useStyles();

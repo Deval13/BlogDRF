@@ -114,7 +114,8 @@ export function Create() {
 		formData.append('author', userid);
 		formData.append('excerpt', postData.excerpt);
 		formData.append('content', postData.content);
-		if (postimage.image == 1) {
+		
+		if (postimage.image.length == 1) {
 			formData.append('image',  postimage.image[0]);
 		}
 	
